@@ -5,7 +5,7 @@ import 'dart:convert';
 
 Future<dynamic> fetchWeatherData() async {
   final url =
-      'https://api.tomorrow.io/v4/weather/forecast?location=60.17117,24.94090&apikey=cG09i2BcEEcq17sAY1MbagbRLfUwQhl2';
+      'https://api.tomorrow.io/v4/weather/forecast?location=60.17117,24.94090&apikey=key';
   final response = await http.get(Uri.parse(url));
 
   if (response.statusCode == 200) {
@@ -57,15 +57,17 @@ class WeatherScreen extends StatelessWidget {
               return Center(child: Text('No weather data available.'));
             }
 
-            final latestData = minutelyList[0]['values'] as Map<String, dynamic>;
+            final latestData =
+                minutelyList[0]['values'] as Map<String, dynamic>;
 
             // Extract values
             final temperature = latestData['temperature'] ?? 0.0;
-            final feelsLikeTemperature = latestData['temperatureApparent'] ?? 0.0;
+            final feelsLikeTemperature =
+                latestData['temperatureApparent'] ?? 0.0;
             final humidity = latestData['humidity'] ?? 0;
             final windSpeed = latestData['windSpeed'] ?? 0.0;
             final weatherCode = latestData['weatherCode'];
- 
+
             // Get an icon based on temperature
             IconData getWeatherIcon(double temp) {
               if (temp > 15) {
@@ -95,7 +97,10 @@ class WeatherScreen extends StatelessWidget {
               child: Column(
                 children: [
                   // Location
-                  Text("Helsinki", style: Theme.of(context).textTheme.headlineSmall),
+                  Text(
+                    "Helsinki",
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
                   SizedBox(height: 8),
                   // Weather Icon and Condition
                   Row(
